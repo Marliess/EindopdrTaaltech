@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-# Anouk Broer, Moniek Nieuwenhuis, Karel Beckeringh, Marlies Quekel
+# s2331373 - Anouk Broer
 # eindopdracht
 
 import socket
+import pickle
 import sys
 from lxml import etree
 from SPARQLWrapper import SPARQLWrapper, JSON
+
 
 # open het bestand paircounts en lees alle zinnen in, split de zinnen op de tab en voeg deze toe aan de lijst anchors
 # de lijst anchors bevat van iedere zin een lijst met drie: elementen anchor, URI, frequentie
 def getPaircounts():
 	anchors = []
-	with open('pairCounts', 'r', encoding='utf-8') as data:
+	with open('pairCounts.txt', 'r', encoding='utf-8') as data:
 	    pairCounts = data.readlines()
 
 	    for line in pairCounts:
@@ -50,16 +52,31 @@ def alpino_parse(sent, host='zardoz.service.rug.nl', port=42424):
 
 # verkrijg X, Y (namen van personen, en bv Olympische Spelen)
 def get_entity(xml):
-	entities = xml.xpath('//node[(@pos="name" and not(@rel="mwp") or (@spectype="deeleigen") or (@cat="mwu" and node[@pos="name"]))]')
+
 	ents = []
+	entities = xml.xpath('.//node[(@pos="name" and not(@rel="mwp") or (@spectype="deeleigen") or (@cat="mwu" and node[@pos="name"]))]')
 	
 	for ent in entities:
 		ents.append(tree_yield(ent))
-
-	#print(ents)
+		
 	return ents
 
-# deze fuctie vindt het vraagwoord
+def get_Olympic(xml):
+
+	entities = xml.xpath('//node[@cat="np" and @rel="obj1"]/node[@rel]/node[@word]')
+	ents = []
+
+	for ent in entities:
+		if "word" in ent.attrib:
+			if ent.attrib["word"] != "de":
+				ents.append(ent.attrib["word"])
+
+	y = [' '.join(map(str, ents))]
+
+	print(y)
+	return y
+
+
 def get_whd(xml):
 
 	root = xml.xpath('.//node[@rel="whd"]')
@@ -69,17 +86,24 @@ def get_whd(xml):
 		woorden.append(tree_y.lower())
 
 	if "hoeveel" in woorden:
+		x = 1
 		#get_properties_hoeveel()
 	elif "wanneer" in woorden:
+		x = 1
 		#get_properties_wat()
 	elif "wat" in woorden:
+		x = 1
 		#get_properties_wat()
 	elif "welke" in woorden:
+		x = 1
 		#get_properties_wat()
 	elif "wat" in woorden:
+		x = 1
 		#get_properties_wat()
 	elif "hoe" in woorden:
+		x = 1
 		#get_properties_wat()
+
 
 def tree_yield(xml):
     leaves = xml.xpath('descendant-or-self::node[@word]')
@@ -137,7 +161,8 @@ def create_query(line, entity, anchors):
 	              'sport':"prop-nl:discipline",
 	              'gespecialiseerd':["dbpedia-owl:speciality", "dbpedia-owl:sportSpecialty", "prop-nl:specialisatie"],
 	              'weegt':["prop-nl:gewicht", "dbpedia-owl:weight"],
-	              'bijnaam':"prop-nl:bijnaam"}
+	              'bijnaam':"prop-nl:bijnaam",
+	               }
 
 
 	for item in line:
@@ -171,7 +196,7 @@ def get_resource(entity, anchors):
 			if int(line[2]) > highestFreq:
 				highestFreq = int(line[2])
 				link = line[1]	
-				return link
+	return link
 
 # stuur de query naar dbpedia en geef het antwoord terug
 # --> geeft op dit moment slechts één antwoord terug (dus ook als er meerdere
@@ -190,48 +215,6 @@ def fire_query(query):
 		for arg in result :
 			answer = result[arg]["value"]
 			return answer
-
-def answerQuestion(uri,x):
-    query = "SELECT STR(?output) WHERE { <"+uri+"> " + "prop-nl:"+x + " ?output }"
-    sparql = SPARQLWrapper("http://nl.dbpedia.org/sparql")
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
-    return sparql.query().convert()
-
-def hoeveel(line):
-        xml = alpino_parse(line)
-
-        root = xml.xpath('//node[@cat="np" and @rel="obj1"]/node[@rel]/node[@word]')
-        listy = []
-        for node in root:
-                if "word" in node.attrib:
-                        if node.attrib["word"] != "de":
-                                listy.append(node.attrib["word"])
-        y = ' '.join(map(str, listy))
-        
-        root = xml.xpath('//node[@cat="np" and @rel="whd"]/node[@pt="n"]')
-        for node in root:
-                x = node.attrib["word"]
-
-        try:
-                line = line.split()
-                page = ["url",0]
-                for pair in open("pairCounts"):
-                        if y in pair:
-                                pair = pair.split('\t')
-                                if int(pair[2]) > page[1]:
-                                        page[0] = pair[1]
-                                        page[1] = int(pair[2])			
-                resource = page[0]
-                uri = resource
-                results = answerQuestion(uri,x.lower())
-                i = 0
-                for result in results["results"]["bindings"]:
-                        for arg in result:
-                                print(result[arg]["value"],"\n")
-                                i+=1
-        except:
-                return 1
 
 def main():
 
@@ -252,21 +235,23 @@ def main():
 		xml = alpino_parse(line)
 
 		# verkrijg de entitiy uit de parse (dus de anchor, bv naam van persoon)
-		enti = get_entity(xml)
-		get_whd(xml)
-		
+		if "Olympische" and "van" in line.split():
+			enti = get_Olympic(xml)
+		else:
+			enti = get_entity(xml)
+		#get_whd(xml)
+
 		# try/except, als het niet mogelijk is om een antwoord te vinden
 		# dan 'faalt' try en wordt geprint dat de vraag niet beantwoord kan worden
 		try:
 			entity = enti[0].lower()
+
 			query = create_query(line, entity, anchors)
 			answer = fire_query(query)
 			print(answer, "\n")
 
 		except:
-                        answer2 = hoeveel(line)
-                        if answer2 == 1:
-                                print("Deze vraag kan helaas niet worden beantwoord.\n")
+			print("Deze vraag kan helaas niet worden beantwoord.\n")
 
 if __name__ == "__main__":
 	main()
