@@ -215,6 +215,48 @@ def fire_query(query):
 		for arg in result :
 			answer = result[arg]["value"]
 			return answer
+			
+def answerQuestion(uri,x):
+    query = "SELECT STR(?output) WHERE { <"+uri+"> " + "prop-nl:"+x + " ?output }"
+    sparql = SPARQLWrapper("http://nl.dbpedia.org/sparql")
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    return sparql.query().convert()
+
+def hoeveel(line):
+        xml = alpino_parse(line)
+
+        root = xml.xpath('//node[@cat="np" and @rel="obj1"]/node[@rel]/node[@word]')
+        listy = []
+        for node in root:
+                if "word" in node.attrib:
+                        if node.attrib["word"] != "de":
+                                listy.append(node.attrib["word"])
+        y = ' '.join(map(str, listy))
+        
+        root = xml.xpath('//node[@cat="np" and @rel="whd"]/node[@pt="n"]')
+        for node in root:
+                x = node.attrib["word"]
+
+        try:
+                line = line.split()
+                page = ["url",0]
+                for pair in open("pairCounts"):
+                        if y in pair:
+                                pair = pair.split('\t')
+                                if int(pair[2]) > page[1]:
+                                        page[0] = pair[1]
+                                        page[1] = int(pair[2])			
+                resource = page[0]
+                uri = resource
+                results = answerQuestion(uri,x.lower())
+                i = 0
+                for result in results["results"]["bindings"]:
+                        for arg in result:
+                                print(result[arg]["value"],"\n")
+                                i+=1
+        except:
+                return 1
 
 def main():
 
@@ -251,7 +293,9 @@ def main():
 			print(answer, "\n")
 
 		except:
-			print("Deze vraag kan helaas niet worden beantwoord.\n")
+			answer2 = hoeveel(line)
+			if answer2 == 1:
+				print("Deze vraag kan helaas niet worden beantwoord.\n")
 
 if __name__ == "__main__":
 	main()
