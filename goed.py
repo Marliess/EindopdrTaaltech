@@ -2,6 +2,7 @@
 # s2331373 - Anouk Broer
 # eindopdracht
 
+import pickle
 import socket
 import sys
 from lxml import etree
@@ -9,14 +10,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 # open het bestand paircounts en lees alle zinnen in, split de zinnen op de tab en voeg deze toe aan de lijst anchors
 # de lijst anchors bevat van iedere zin een lijst met drie: elementen anchor, URI, frequentie
-def getPaircounts():
-	anchors = []
-	with open('pairCounts', 'r', encoding='utf-8') as data:
-	    pairCounts = data.readlines()
-
-	    for line in pairCounts:
-	        anchors.append(line.split('\t'))
-
+def getQuestions():
 	# lees alle vragen in die moeten worden beantwoord 
 	# stop al deze vragen in een lijst // een element in de lijst is een vraag
 	vragen = []
@@ -28,7 +22,7 @@ def getPaircounts():
 			vragen.append(line.strip('\n'))
 
 	# return lijst met alle anchors (= naam van bv persoon), return een lijst met alle vragen 
-	return anchors, vragen
+	return vragen
 
 # parse input sentence and return alpino output as an xml element tree
 # code komt rechtstreeks uit de slides 
@@ -88,7 +82,7 @@ def tree_yield(xml):
         words.append(l.attrib["word"])
     return " ".join(words)
 
-def create_query(line, entity, anchors):	
+def create_query(line, entity, data):	
 
 	# als de input van de gebruiker eindigt op een '?', haal deze dan weg.
 	# geen idee waarom dit er nog bij staat, maar als ik het weg haal werkt
@@ -96,7 +90,8 @@ def create_query(line, entity, anchors):
 	if line[-1] == "?":
 			line = line[:-1].split(" ")
 
-	resource = "<" + get_resource(entity, anchors) + ">"
+	resource = data[entity][1]
+	uri = "<" + resource + ">"
 	#print(resource)
 
 	# de basis van de query
@@ -149,15 +144,15 @@ def create_query(line, entity, anchors):
 
 				# als de lengte van de lijst groter is dan 2 --> voor UNION
 				if len(propList) == 2:
-					query = basis.format("{{" + resource + " " + propList[0] +" ?result} UNION {" + resource + " " + propList[1] + " ?result}}")
+					query = basis.format("{{" + uri + " " + propList[0] +" ?result} UNION {" + uri + " " + propList[1] + " ?result}}")
 
 				# als de lengte van de lijst groter is dan 3
 				elif len(propList) == 3:
-					query = basis.format("{{" + resource + " " + propList[0] +" ?result} UNION {" + resource + " " + propList[1] + " ?result} UNION {" + resource + " " + propList[2] + " ?result}}")
+					query = basis.format("{{" + uri + " " + propList[0] +" ?result} UNION {" + uri + " " + propList[1] + " ?result} UNION {" + uri + " " + propList[2] + " ?result}}")
 
 			# als de value van de dictionary geen lijst is			
 			else:
-				query = basis.format("{{" + resource + " " + properties[item] +" ?result}}")
+				query = basis.format("{{" + uri + " " + properties[item] +" ?result}}")
 
 	#print(query)
 	return(query)
@@ -234,8 +229,10 @@ def hoeveel(line):
                 return 1
 
 def main():
-
-	anchors, vragen = getPaircounts()
+	data = pickle.load(open('pairCounts.pickle','rb'))
+	vragen = getQuestions()
+	goed = 0
+	fout = 0
 
 	print()
 
@@ -259,7 +256,7 @@ def main():
 		# dan 'faalt' try en wordt geprint dat de vraag niet beantwoord kan worden
 		try:
 			entity = enti[0].lower()
-			query = create_query(line, entity, anchors)
+			query = create_query(line, entity, data)
 			answer = fire_query(query)
 			print(answer, "\n")
 
