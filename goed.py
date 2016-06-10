@@ -237,9 +237,6 @@ def main():
 
 	anchors, vragen = getPaircounts()
 
-	goed = 0
-	fout = 0
-
 	print()
 
 	for line in vragen:
@@ -262,20 +259,14 @@ def main():
 		# dan 'faalt' try en wordt geprint dat de vraag niet beantwoord kan worden
 		try:
 			entity = enti[0].lower()
-
 			query = create_query(line, entity, anchors)
 			answer = fire_query(query)
 			print(answer, "\n")
-			goed += 1
 
 		except:
                         answer2 = hoeveel(line)
                         if answer2 == 1:
                                 print("Deze vraag kan helaas niet worden beantwoord.\n")
-                                fout += 1
-
-	# even om te testen hoeveel antwoorden er gevonden kunnen worden 
-	print("Aantal vragen kunnen beantwoorden {}. Aantal vragen niet kunnen beantwoorden {}".format(goed,fout))
 
 if __name__ == "__main__":
 	main()
