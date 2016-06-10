@@ -97,7 +97,7 @@ def create_query(line, entity, anchors):
 			line = line[:-1].split(" ")
 
 	resource = "<" + get_resource(entity, anchors) + ">"
-	#print(resource)
+	print(resource)
 
 	# de basis van de query
 	basis = """
