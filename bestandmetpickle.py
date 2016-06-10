@@ -229,7 +229,21 @@ def hoeveel(line):
                 return 1
 
 def main():
-	data = pickle.load(open('pairCounts.pickle','rb'))
+	data = {}
+	
+	with open("pairCounts") as paircount:
+		for line in paircount:	
+			if len(line.split("\t")) >= 3:
+				line = line.rstrip()
+				name, uri, freq = line.split("\t")
+				freq = int(freq)
+				if name in data: 
+					if data[name][0] < freq:
+						data[name] = [freq,uri]
+				else: 
+					data[name] = [freq,uri]	
+
+
 	vragen = getQuestions()
 	goed = 0
 	fout = 0
