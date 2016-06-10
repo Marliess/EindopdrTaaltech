@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# s2331373 - Anouk Broer
+# Anouk Broer, Moniek Nieuwenhuis, Karel Beckeringh, Marlies Quekel
 # eindopdracht
 
 import socket
