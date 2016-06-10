@@ -59,6 +59,28 @@ def get_entity(xml):
 	#print(ents)
 	return ents
 
+# deze fuctie vindt het vraagwoord
+def get_whd(xml):
+
+	root = xml.xpath('.//node[@rel="whd"]')
+	woorden = []
+	for node in root:
+		tree_y = tree_yield(node)
+		woorden.append(tree_y.lower())
+
+	if "hoeveel" in woorden:
+		#get_properties_hoeveel()
+	elif "wanneer" in woorden:
+		#get_properties_wat()
+	elif "wat" in woorden:
+		#get_properties_wat()
+	elif "welke" in woorden:
+		#get_properties_wat()
+	elif "wat" in woorden:
+		#get_properties_wat()
+	elif "hoe" in woorden:
+		#get_properties_wat()
+
 def tree_yield(xml):
     leaves = xml.xpath('descendant-or-self::node[@word]')
     words = []
