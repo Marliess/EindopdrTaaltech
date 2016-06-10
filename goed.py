@@ -256,6 +256,7 @@ def main():
 
 		# verkrijg de entitiy uit de parse (dus de anchor, bv naam van persoon)
 		enti = get_entity(xml)
+		get_whd(xml)
 		
 		# try/except, als het niet mogelijk is om een antwoord te vinden
 		# dan 'faalt' try en wordt geprint dat de vraag niet beantwoord kan worden
