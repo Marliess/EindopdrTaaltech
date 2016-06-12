@@ -1,7 +1,7 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # eindopdracht.py
 # Dit programma is geschreven voor de eindopdracht van Taaltechnologie 2016
-# Door: Anouk Broer, Moniek Nieuwenhuis, Karel Beckeringh, Marlies Quekel 
+# Door: Anouk Broer, Moniek Nieuwenhuis, Karel Beckeringh en Marlies Quekel 
 
 import socket
 import properties
