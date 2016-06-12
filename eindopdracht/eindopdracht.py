@@ -217,13 +217,6 @@ def fire_query(query):
 
 	return answer
 
-def answerQuestion(uri,x):
-    query = "SELECT STR(?output) WHERE { <"+uri+"> " + "prop-nl:"+x + " ?output }"
-    sparql = SPARQLWrapper("http://nl.dbpedia.org/sparql")
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
-    return sparql.query().convert()
-
 ########################################
 # main
 # De functie main 
