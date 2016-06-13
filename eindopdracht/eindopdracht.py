@@ -135,6 +135,8 @@ def get_whd(xml):
 		#get_properties_wanneer()
 	elif "wie" in woorden:
 		#get_properties_wie()
+	else:
+		#gebruik algemene properties
 		
 ########################################
 # create_query
