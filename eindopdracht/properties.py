@@ -40,7 +40,7 @@ def properties():
             'eerstvolgende':["dbpedia-owl:nextEvent","prop-nl:volgende"],
             'vorige':["dbpedia-owl:previousEvent","prop-nl:vorige"],
             'hoeveelste':"prop-nl:spelen",
-            'website':"foaf:homepage"],
+            'website':["foaf:homepage"],
 
             'atleten':["prop-nl:atleten","dbpedia-owl:numberOfParticipatingAthletes"],
             'deelnemers':["prop-nl:atleten","dbpedia-owl:numberOfParticipatingAthletes"],
