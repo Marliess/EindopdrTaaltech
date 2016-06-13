@@ -120,6 +120,23 @@ def tree_yield(xml):
     return " ".join(words)
 
 ########################################
+# get_whd
+# xxxxx
+########################################
+def get_whd(xml):
+
+	root = xml.xpath('.//node[@rel="whd"]')
+	woorden = []
+	for node in root:
+		tree_y = tree_yield(node)
+		woorden.append(tree_y.lower())
+
+	if "wanneer" in woorden:
+		#get_properties_wanneer()
+	elif "wie" in woorden:
+		#get_properties_wie()
+		
+########################################
 # create_query
 # De functie create_query maakt een sparql query op basis van de entity, URI en een bijbehorende propertie.
 # In het bestand properties.py staat een dictionary met woorden (key) en bijbehorende properties (values). Voor elke vraag
