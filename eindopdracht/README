@@ -1,9 +1,34 @@
+-------------------------------
+ALEGEMENE INFORMATIE
+-------------------------------
+
 Eindopdracht Taaltechnologie
-Auteurs: Anouk Broer, Karel Beckeringh, Moniek Nieuwenhuis en Marlies Quekel
 Datum: 13 Juni 2016
+Auteurs: Anouk Broer, Karel Beckeringh, Moniek Nieuwenhuis en Marlies Quekel
 
-1. Bestanden eindopdracht.py, properties.py, 50oefenvragen.txt en pairCounts moeten in dezelfde map staan.
-2. In de terminal intypen:  python3 eindopdracht.py
-3. Alle vragen + antwoorden worden geprint in de terminal.
+-------------------------------
+BENODIGDE BESTANDEN
+-------------------------------
 
-Als je de vragen + antwoorden in een tekstbestand wilt hebben, typ in de terminal: python3 eindopdracht.py > antwoorden.txt
+Om het programma uit te kunnen voeren zijn de volgende bestanden nodig:
+
+- pairCounts.txt
+- 50oefenvragen.txt
+- properties.py
+- eindopdracht.py
+
+-------------------------------
+INSTRUCTIES VOOR HET PROGRAMMA
+-------------------------------
+
+Het programma staat in het bestand eindopdracht.py. Wanneer dit bestand wordt
+uitgevoerd start direct het programma. Het programma kan worden uitgevoerd in
+een Python shell, of in de terminal. Om het bestand te openen in de terminal
+typ in de terminal: python[HIER DE JE PYTHON VERSIE] eindopdracht.py
+
+Het programma beantwoordt de vragen in het bestand "50oefenvragen.txt". Als je andere 
+vragen wil beantwoorden kun je de vragen in het bestand bestand "50oefenvragen.txt" 
+veranderen in je eigen vragen.
+
+Als je de vragen en de bijbehorende antwoorden in een tekstbestand wilt hebben, 
+kan dit met behulp van de terminal. Typ in de terminal: python[HIER DE JE PYTHON VERSIE] eindopdracht.py
