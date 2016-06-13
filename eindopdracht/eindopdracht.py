@@ -71,40 +71,40 @@ def alpino_parse(sent, host='zardoz.service.rug.nl', port=42424):
 # get_entity
 # De functie get_entity verkrijgt de entiteit uit de vraag. Dit is bijvoorbeeld de naam van een sporter of de naam
 # van een Olympische Spelen. De entiteit wordt verkregen door in de XML structuur te zoeken op bepaalde relaties
-# tussen woorden en nodes. --> zie de zoekopdracht bij xml.xpath. De gevonden entities worden toegevoegd aan de lijst entity.
+# tussen woorden en nodes. --> zie de zoekopdracht bij xml.xpath. De gevonden entities worden toegevoegd aan de lijst entitie.
 ########################################
 
 def get_entity(xml):
-	entity = []
+	entitie = []
 
-	entitityList = xml.xpath('.//node[(@pos="name" and not(@rel="mwp") or (@spectype="deeleigen") or (@cat="mwu" and node[@pos="name"]))]')
+	entitieList = xml.xpath('.//node[(@pos="name" and not(@rel="mwp") or (@spectype="deeleigen") or (@cat="mwu" and node[@pos="name"]))]')
 	
-	for ent in entityList:
-		entity.append(tree_yield(ent))
+	for ent in entitieList:
+		entitie.append(tree_yield(ent))
 
-	return entity
+	return entitie
 
 ########################################
 # get_olympic
-# De functie get_olympic is bijna hetzelfde als de functie get_entity. get_olympic is echter bedoeld voor zinnen waarin de entity
+# De functie get_olympic is bijna hetzelfde als de functie get_entity. get_olympic is echter bedoeld voor zinnen waarin de entitie
 # een Olympische Spelen is waarbij het woord "van" voor het jaartal van de Spelen staat. De entiteit wordt verkregen door in de 
 # XML structuur te zoeken op bepaalde relaties tussen woorden en nodes. --> zie de zoekopdracht bij xml.xpath. De gevonden 
-# entiteiten worden toegevoegd aan de lijst entity.
+# entiteiten worden toegevoegd aan de lijst entitie.
 ########################################
 
 def get_olympic(xml):
 	entities = []
 
-	entityList = xml.xpath('//node[@cat="np" and @rel="obj1"]/node[@rel]/node[@word]')
+	entitieList = xml.xpath('//node[@cat="np" and @rel="obj1"]/node[@rel]/node[@word]')
 
-	for ent in entityList:
+	for ent in entitieList:
 		if "word" in ent.attrib:
 			if ent.attrib["word"] != "de":
 				entities.append(ent.attrib["word"])
 
-	entity = [' '.join(map(str, entities))]
+	entitie = [' '.join(map(str, entities))]
 
-	return entity
+	return entitie
 
 ########################################
 # tree_yield
@@ -121,14 +121,14 @@ def tree_yield(xml):
 
 ########################################
 # create_query
-# De functie create_query maakt een sparql query op basis van de entity, URI en een bijbehorende property.
+# De functie create_query maakt een sparql query op basis van de entity, URI en een bijbehorende propertie.
 # In het bestand properties.py staat een dictionary met woorden (key) en bijbehorende properties (values). Voor elke vraag
 # wordt gekeken of een key uit de properties dictionary voorkomt in de vraag. Als een key voorkomt, wordt de bijbehorende
-# property gezocht. Sommige keys hebben meerdere properties. Er worden verschillende properties getest in de query,
+# propertie gezocht. Sommige keys hebben meerdere properties. Er worden verschillende properties getest in de query,
 # net zo lang totdat er een antwoordt komt. De juiste query wordt uitgevoerd door de functie fire_query.
 ########################################
 
-def create_query(line, entity, anchors, propertyList):
+def create_query(line, entity, anchors, propertieList):
 
 	line = line[:-1].split(" ")
 
@@ -145,10 +145,10 @@ def create_query(line, entity, anchors, propertyList):
 	
 	for item in line:
 
-		if item in propertyList:
+		if item in propertieList:
 
-			if type(propertyList[item]) is list:
-				propList = propertyList[item]
+			if type(propertieList[item]) is list:
+				propList = propertieList[item]
 				
 				try:
 					query = basis.format("{{" + resource + " " + propList[0] +" ?result}}")
@@ -176,7 +176,7 @@ def create_query(line, entity, anchors, propertyList):
 							except:
 								break
 			else:
-				query = basis.format("{{" + resource + " " + propertyList[item] +" ?result}}")
+				query = basis.format("{{" + resource + " " + propertieList[item] +" ?result}}")
 				fire_query(query)
 
 	return(query)
@@ -217,6 +217,7 @@ def fire_query(query):
 
 	return answer
 
+
 ########################################
 # main
 # De functie main 
@@ -225,7 +226,7 @@ def fire_query(query):
 def main():
 
 	# verkrijg de dictionary met properties
-	propertyList = properties.properties()	
+	propertieList = properties.properties()	
 
 	# verkrijg de vragen die beantwoord moeten worden
 	questions = get_questions()
@@ -251,8 +252,8 @@ def main():
 
 		# verkrijg de entitiy uit de parse 
 		# als het woord Olympische in de vraag staat en deze wordt gevolgd door ... "van"
-		# verkrijg dan de entity met behulp van de functie get_olympic. Zo niet, verkrijgt
-		# de entity dan met behulp van de functie get_entity
+		# verkrijg dan de entitie met behulp van de functie get_olympic. Zo niet, verkrijgt
+		# de entitie dan met behulp van de functie get_entity
 
 
 		olymp = ["Olympische Spelen van",
@@ -283,14 +284,14 @@ def main():
 		# dan is de poging gefaalt en kan de vraag niet beantwoord worden.
 		try:
 			entity = enti[0].lower()
-			query = create_query(line, entity, anchors, propertyList)
+			query = create_query(line, entity, anchors, propertieList)
 			goed += 1	
 			print()
 		except:
-			print(">>> Deze vraag kan helaas niet worden beantwoord.\n")
+                        print(">>> Deze vraag kan helaas niet worden beantwoord.\n")
 			# schrijf alle vragen die niet beantwoord kunnen worden naar "f"
 			# f.write(line + "\n")
-			fout += 1
+                        fout += 1
 
 	print("Er zijn {} die beantwoord konden worden. {} konden niet worden beantwoord".format(goed,fout))
 
