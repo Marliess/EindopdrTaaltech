@@ -132,11 +132,11 @@ def get_whd(xml):
 		woorden.append(tree_y.lower())
 
 	if "wanneer" in woorden:
-		#get_properties_wanneer()
+		return properties.properties()	
 	elif "wie" in woorden:
-		#get_properties_wie()
+		return properties.properties()	
 	else:
-		#gebruik algemene properties
+		return properties.properties()	
 		
 ########################################
 # create_query
@@ -244,9 +244,9 @@ def fire_query(query):
 
 def main():
 
-	# verkrijg de dictionary met properties
-	propertieList = properties.properties()	
-
+	# kijk welk vraagwoord
+	propertieList = get_whd()
+	
 	# verkrijg de vragen die beantwoord moeten worden
 	questions = get_questions()
 
