@@ -121,7 +121,8 @@ def tree_yield(xml):
 
 ########################################
 # get_whd
-# xxxxx
+# De functie get_whd zoekt het vraagwoord in de zin, en aan de hand van het gevonden vraagwoord
+# wordt een lijst met properties geselecteerd.
 ########################################
 def get_whd(xml):
 
