@@ -140,7 +140,7 @@ def propertiesWanneer():
 			'lengte':["prop-nl:lengte","dbpedia-owl:height"],
 			'lang':["prop-nl:lengte","dbpedia-owl:height"],
 			'hoogte':["prop-nl:lengte","dbpedia-owl:height"],
-			'geboren':"prop-nl:geboortedatum",
+			'geboren':["prop-nl:geboorteplaats", "dbpedia-owl:birthPlace"],
 			'verjaardag':"prop-nl:geboortedatum",
 			'bijnaam':"prop-nl:bijnaam",
 			'bijnamen':"prop-nl:bijnaam",
