@@ -133,8 +133,8 @@ def get_whd(xml):
 
 	if "wanneer" in woorden:
 		return properties.propertiesWanneer()	
-	elif "wie" in woorden:
-		return properties.propertiesWie()	
+	elif "waar" in woorden:
+		return properties.propertiesWaar()	
 	else:
 		return properties.properties()	
 		
@@ -243,9 +243,6 @@ def fire_query(query):
 ########################################
 
 def main():
-
-	# kijk welk vraagwoord
-	propertieList = get_whd()
 	
 	# verkrijg de vragen die beantwoord moeten worden
 	questions = get_questions()
@@ -268,6 +265,9 @@ def main():
 
 		# parse de vraag met alpino  
 		xml = alpino_parse(line)
+
+		# kijk welk vraagwoord
+		propertieList = get_whd(xml)
 
 		# verkrijg de entitiy uit de parse 
 		# als het woord Olympische in de vraag staat en deze wordt gevolgd door ... "van"
