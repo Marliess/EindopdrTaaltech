@@ -264,17 +264,17 @@ def main():
 				 "Olympische Zomerspelen in"]
 
 
-		if olymp[0] in line:
+		if olymp[0].lower() in line.lower():
 			enti = get_olympic(xml)	
-		elif olymp[1] in line:
+		elif olymp[1].lower() in line.lower():
 			enti = get_olympic(xml)
-		elif olymp[2] in line:
+		elif olymp[2].lower() in line.lower():
 			enti = get_olympic(xml)
-		elif olymp[3] in line:
+		elif olymp[3].lower() in line.lower():
 			enti = get_olympic(xml)
-		elif olymp[4] in line:
+		elif olymp[4].lower() in line.lower():
 			enti = get_olympic(xml)
-		elif olymp[5] in line:
+		elif olymp[5].lower() in line.lower():
 			enti = get_olympic(xml)
 		else:
 			enti = get_entity(xml)
