@@ -11,7 +11,6 @@ def properties():
             'startdatum':["prop-nl:opening","dbpedia-owl:startDate"],
             'geopend':["prop-nl:opening","dbpedia-owl:startDate"],
             'begin':["prop-nl:opening","dbpedia-owl:startDate"],
-            'begonnen':["prop-nl:opening","dbpedia-owl:startDate"],
             'beginnen':["prop-nl:opening","dbpedia-owl:startDate"],
             'begonnen':["prop-nl:opening","dbpedia-owl:startDate"],
             'sluiting':["prop-nl:sluiting","dbpedia-owl:endDate"],
@@ -25,7 +24,7 @@ def properties():
             'locatie':["prop-nl:plaats","dbpedia-owl:location"],
             'gehouden':["prop-nl:plaats","dbpedia-owl:location"],
             'land':["prop-nl:plaats","dbpedia-owl:location"],
-            'stad':["prop-nl:plaats","dbpedia-owl:location","prop-nl:geboorteplaats","prop-nl:geboortestad"],
+            'stad':["prop-nl:plaats","dbpedia-owl:location","prop-nl:geboorteplaats","dbpedia-owl:birthPlace"],
 
             'opener':["prop-nl:opener","dbpedia-owl:officialOpenedBy"],
             'opende':["prop-nl:opener","dbpedia-owl:officialOpenedBy"],
