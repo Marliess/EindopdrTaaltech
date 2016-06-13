@@ -149,7 +149,10 @@ def get_whd(xml):
 
 def create_query(line, entity, anchors, propertieList):
 
-	line = line[:-1].split(" ")
+	if line[-1] == "?":
+		line = line[:-1].split(" ")
+	else:
+		line = line.split(" ")
 
 	resource = "<" + get_resource(entity, anchors) + ">"
 	#print(resource)
