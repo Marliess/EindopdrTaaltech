@@ -132,9 +132,9 @@ def get_whd(xml):
 		woorden.append(tree_y.lower())
 
 	if "wanneer" in woorden:
-		return propertiesWanneer.properties()	
+		return properties.propertiesWanneer()	
 	elif "wie" in woorden:
-		return propertiesWie.properties()	
+		return properties.propertiesWie()	
 	else:
 		return properties.properties()	
 		
