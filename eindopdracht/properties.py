@@ -11,6 +11,7 @@ def properties():
             'startdatum':["prop-nl:opening","dbpedia-owl:startDate"],
             'geopend':["prop-nl:opening","dbpedia-owl:startDate"],
             'begin':["prop-nl:opening","dbpedia-owl:startDate"],
+            'begonnen':["prop-nl:opening","dbpedia-owl:startDate"],
             'beginnen':["prop-nl:opening","dbpedia-owl:startDate"],
             'begonnen':["prop-nl:opening","dbpedia-owl:startDate"],
             'sluiting':["prop-nl:sluiting","dbpedia-owl:endDate"],
@@ -20,7 +21,7 @@ def properties():
             'eindigen':["prop-nl:sluiting","dbpedia-owl:endDate"],
             'eindigden':["prop-nl:sluiting","dbpedia-owl:endDate"],
             'eind':["prop-nl:sluiting","dbpedia-owl:endDate"],
-            'plaats':["prop-nl:plaats","dbpedia-owl:location","prop-nl:geboorteplaats"],
+            'plaats':["prop-nl:plaats","dbpedia-owl:location", "prop-nl:geboorteplaats", "dbpedia-owl:birthPlace"],
             'locatie':["prop-nl:plaats","dbpedia-owl:location"],
             'gehouden':["prop-nl:plaats","dbpedia-owl:location"],
             'land':["prop-nl:plaats","dbpedia-owl:location"],
@@ -40,7 +41,7 @@ def properties():
             'eerstvolgende':["dbpedia-owl:nextEvent","prop-nl:volgende"],
             'vorige':["dbpedia-owl:previousEvent","prop-nl:vorige"],
             'hoeveelste':"prop-nl:spelen",
-            'website':["foaf:homepage"],
+            'website':"foaf:homepage",
 
             'atleten':["prop-nl:atleten","dbpedia-owl:numberOfParticipatingAthletes"],
             'deelnemers':["prop-nl:atleten","dbpedia-owl:numberOfParticipatingAthletes"],
@@ -86,6 +87,7 @@ def properties():
 
             'georganiseerd':["prop-nl:organisator","dbpedia-owl:organisation"],
             'organiseert':["prop-nl:organisator","dbpedia-owl:organisation"],
+            'organiseren': ["prop-nl:organisator","dbpedia-owl:organisation"],
             'voorzitter':["prop-nl:voorzitter","dbpedia-owl:chairperson"],
             'president':["prop-nl:voorzitter","dbpedia-owl:chairperson"],
             'topman':["prop-nl:voorzitter","dbpedia-owl:chairperson"],
@@ -96,9 +98,11 @@ def properties():
 def propertiesWaar():
     prop = properties()
     prop['geboren'] = ["prop-nl:geboorteplaats","prop-nl:geboortestad","dbpedia-owl:birthPlace"]
+    
     return prop
 
 def propertiesWanneer():
     prop = properties()
     prop['geboren'] = ["prop-nl:geboortedatum","dbpedia-owl:birthDate"]
+    
     return prop
