@@ -38,7 +38,7 @@ def properties():
 			'atleten':["prop-nl:atleten","dbpedia-owl:numberOfParticipatingAthletes"],
 			'bronzen':["prop-nl:totaalBrons","dbpedia-owl:numberOfBronzeMedalsWon"],
 			'deelnemers':["prop-nl:atleten","dbpedia-owl:numberOfParticipatingAthletes"],
-			'sporten':["dbpedia-owl:numberOfSports","prop-nl:sporten"],
+			'sporten':["dbpedia-owl:numberOfSports","prop-nl:sporten", "prop-nl:sport"],
 			'landen':["prop-nl:landen","dbpedia-owl:numberOfParticipatingNations"],
 			'wintersporten':"prop-nl:sport",
 			'onderdelen':"prop-nl:disciplines",
