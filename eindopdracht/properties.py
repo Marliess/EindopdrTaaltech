@@ -68,7 +68,7 @@ def properties():
 			'gespecialiseerd':["prop-nl:specialisatie", "dbpedia-owl:speciality", "dbpedia-owl:sportSpecialty"],
 			'specialisatie':["prop-nl:specialisatie", "dbpedia-owl:speciality", "dbpedia-owl:sportSpecialty"],
 			'zwemstijl':"dbpedia-owl:swimmingStyle",
-			'zwemstijlen':"dbpedia-owl:swimmingStyle"
+			'zwemstijlen':"dbpedia-owl:swimmingStyle",
 			'meegedaan':"dbpedia-owl:olympicGames",
 
 			'georganiseerd':["prop-nl:organisator","dbpedia-owl:organisation"],
