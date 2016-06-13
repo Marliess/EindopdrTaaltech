@@ -10,7 +10,7 @@ def properties():
 
 			'opening':["prop-nl:opening","dbpedia-owl:officialOpenedBy"],
 			'startdatum':"prop-nl:opening",
-			'geopend':"prop-nl:opening",
+			'geopend':["prop-nl:opening","prop-nl:opener"],
 			'begin':"prop-nl:opening",
 			'sluiting':"prop-nl:sluiting",
 			'einddatum': "prop-nl:sluiting",
@@ -90,7 +90,7 @@ def propertiesWaar():
 
 			'opening':["prop-nl:opening","dbpedia-owl:officialOpenedBy"],
 			'startdatum':"prop-nl:opening",
-			'geopend':"prop-nl:opening",
+			'geopend':["prop-nl:opening","prop-nl:opener"],
 			'begin':"prop-nl:opening",
 			'sluiting':"prop-nl:sluiting",
 			'einddatum': "prop-nl:sluiting",
@@ -170,7 +170,7 @@ def propertiesWanneer():
 
 			'opening':["prop-nl:opening","dbpedia-owl:officialOpenedBy"],
 			'startdatum':"prop-nl:opening",
-			'geopend':"prop-nl:opening",
+			'geopend':["prop-nl:opening","prop-nl:opener"],
 			'begin':"prop-nl:opening",
 			'sluiting':"prop-nl:sluiting",
 			'einddatum': "prop-nl:sluiting",
