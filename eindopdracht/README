@@ -24,11 +24,11 @@ INSTRUCTIES VOOR HET PROGRAMMA
 Het programma staat in het bestand eindopdracht.py. Wanneer dit bestand wordt
 uitgevoerd start direct het programma. Het programma kan worden uitgevoerd in
 een Python shell, of in de terminal. Om het bestand te openen in de terminal
-typ in de terminal: python[HIER DE JE PYTHON VERSIE] eindopdracht.py
+typ in de terminal: python[HIER JE PYTHON VERSIE] eindopdracht.py
 
 Het programma beantwoordt de vragen in het bestand "50oefenvragen.txt". Als je andere 
 vragen wil beantwoorden kun je de vragen in het bestand bestand "50oefenvragen.txt" 
 veranderen in je eigen vragen.
 
 Als je de vragen en de bijbehorende antwoorden in een tekstbestand wilt hebben, 
-kan dit met behulp van de terminal. Typ in de terminal: python[HIER DE JE PYTHON VERSIE] eindopdracht.py
+kan dit met behulp van de terminal. Typ in de terminal: python[HIER JE PYTHON VERSIE] eindopdracht.py
