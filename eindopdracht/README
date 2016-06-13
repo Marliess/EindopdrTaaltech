@@ -1,0 +1,9 @@
+Eindopdracht Taaltechnologie
+Auteurs: Anouk Broer, Karel Beckeringh, Moniek Nieuwenhuis en Marlies Quekel
+Datum: 13 Juni 2016
+
+1. Bestanden eindopdracht.py, properties.py, 50oefenvragen.txt en pairCounts moeten in dezelfde map staan.
+2. In de terminal intypen:  python3 eindopdracht.py
+3. Alle vragen + antwoorden worden geprint in de terminal.
+
+Als je de vragen + antwoorden in een tekstbestand wilt hebben, typ in de terminal: python3 eindopdracht.py > antwoorden.txt
