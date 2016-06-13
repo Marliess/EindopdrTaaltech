@@ -36,7 +36,7 @@ def get_questions():
 def get_paircounts():
 
 	anchors = []
-	with open('pairCounts.txt', 'r', encoding='utf-8') as data:
+	with open('pairCounts', 'r', encoding='utf-8') as data:
 	    pairCounts = data.readlines()
 
 	    for line in pairCounts:
